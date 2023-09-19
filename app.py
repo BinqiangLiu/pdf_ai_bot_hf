@@ -71,8 +71,8 @@ def get_conversation_chain(vector_store):
     return conversation_chain
 
 def handle_user_input(question):
-    response = st.session_state.conversation({'question':question})    
-if 'chat_history' in response:
+  response = st.session_state.conversation({'question':question})    
+  if 'chat_history' in response:
     st.session_state.chat_history = response['chat_history']    
 #    st.session_state.chat_history = response['chat_history']以上两行为新增
     for i, message in enumerate(st.session_state.chat_history):
