@@ -71,10 +71,8 @@ def get_conversation_chain(vector_store):
     return conversation_chain
 
 def handle_user_input(question):
-  response = st.session_state.conversation({'question':question})    
-  if 'chat_history' in response:
-    st.session_state.chat_history = response['chat_history']    
-#    st.session_state.chat_history = response['chat_history']以上两行为新增
+    response = st.session_state.conversation({'question':question})    
+    st.session_state.chat_history = response['chat_history']
     for i, message in enumerate(st.session_state.chat_history):
         if i % 2 == 0:
             st.write(user_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
@@ -88,9 +86,7 @@ def main():
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
     if "chat_history" not in st.session_state:
-#        st.session_state.chat_history = None以下两行为新增
-        if st.session_state.chat_history is None:
-            st.session_state.chat_history = []    
+        st.session_state.chat_history = None
     st.header('Chat with Your own PDFs :books:')
     question = st.text_input("Ask anything to your PDF: ")
     if question:
