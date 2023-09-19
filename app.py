@@ -9,18 +9,18 @@ from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from htmlTemplates import bot_template, user_template, css
+from transformers import pipeline
+
+HUGGINGFACEHUB_API_TOKEN = "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"
 
 def get_pdf_text(pdf_files):
     
     text = ""
-
     for pdf_file in pdf_files:
         reader = PdfReader(pdf_file)
         for page in reader.pages:
             text += page.extract_text()
-
     return text
-
 
 def get_chunk_text(text):
     
@@ -40,31 +40,28 @@ def get_vector_store(text_chunks):
     
     # For OpenAI Embeddings
     
-#    embeddings = OpenAIEmbeddings()
+   # embeddings = OpenAIEmbeddings()
     
     # For Huggingface Embeddings
 
-    #embeddings = HuggingFaceInstructEmbeddings(model_name = "hkunlp/instructor-xl")
-    #embeddings = HuggingFaceInstructEmbeddings(model_name = "sentence-transformers/all-MiniLM-L6-v2")
+    # embeddings = HuggingFaceInstructEmbeddings(model_name = "hkunlp/instructor-xl")
     embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
-    HUGGINGFACEHUB_API_TOKEN = "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"
-#model_id = "sentence-transformers/all-MiniLM-L6-v2"
     
+
     vectorstore = FAISS.from_texts(texts = text_chunks, embedding = embeddings)
     
     return vectorstore
-
 
 def get_conversation_chain(vector_store):
     
     # OpenAI Model
 
-#    llm = ChatOpenAI()
+    #llm = ChatOpenAI()
 
     # HuggingFace Model
 
-    #llm = HuggingFaceHub(repo_id="tiiuae/falcon-40b-instruct", model_kwargs={"temperature":0.5, "max_length":512})
+    # llm = HuggingFaceHub(repo_id="google/flan-t5-xxl", model_kwargs={"temperature":0.5, "max_length":512})
     repo_id="HuggingFaceH4/starchat-beta"
     llm = HuggingFaceHub(repo_id=repo_id,
                      model_kwargs={"min_length":100,
@@ -74,7 +71,6 @@ def get_conversation_chain(vector_store):
                                    "top_p":0.95, "eos_token_id":49155})
 
     memory = ConversationBufferMemory(memory_key='chat_history', return_messages=True)
-
     conversation_chain = ConversationalRetrievalChain.from_llm(
         llm = llm,
         retriever = vector_store.as_retriever(),
@@ -82,7 +78,6 @@ def get_conversation_chain(vector_store):
     )
 
     return conversation_chain
-
 
 def handle_user_input(question):
 
@@ -94,6 +89,8 @@ def handle_user_input(question):
             st.write(user_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
         else:
             st.write(bot_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
+
+
 
 def main():
     load_dotenv()
@@ -112,6 +109,7 @@ def main():
 
     if question:
         handle_user_input(question)
+    
 
     with st.sidebar:
         st.subheader("Upload your Documents Here: ")
@@ -125,6 +123,7 @@ def main():
 
                 # Get Text Chunks
                 text_chunks = get_chunk_text(raw_text)
+                
 
                 # Create Vector Store
                 
@@ -136,7 +135,5 @@ def main():
                 st.session_state.conversation =  get_conversation_chain(vector_store)
 
 
-
-
-
-
+if __name__ == '__main__':
+    main()
