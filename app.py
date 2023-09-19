@@ -4,6 +4,7 @@ from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings, HuggingFaceInstructEmbeddings
 from langchain.embeddings import HuggingFaceEmbeddings, SentenceTransformerEmbeddings
+from langchain import HuggingFaceHub
 from langchain.vectorstores import FAISS
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
