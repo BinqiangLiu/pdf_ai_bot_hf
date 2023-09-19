@@ -11,7 +11,7 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from htmlTemplates import bot_template, user_template, css
 from transformers import pipeline
-import request
+import sys
 import os
 from dotenv import load_dotenv
 
