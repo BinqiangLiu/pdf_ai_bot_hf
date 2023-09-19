@@ -80,7 +80,9 @@ def get_conversation_chain(vector_store):
         retriever = vector_store.as_retriever(),
         memory = memory
     )
-
+    print("***Start of printing Conversation_Chain***")
+    print(conversation_chain)
+    print("***End of printing Conversation_Chain***")
     return conversation_chain
 
 def handle_user_input(question):
