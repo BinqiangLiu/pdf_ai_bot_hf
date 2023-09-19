@@ -12,7 +12,7 @@ from langchain.chat_models import ChatOpenAI
 from htmlTemplates import bot_template, user_template, css
 from transformers import pipeline
 
-HUGGINGFACEHUB_API_TOKEN = "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"
+HUGGINGFACEHUB_API_TOKEN = os.geteven("HUGGINGFACEHUB_API_TOKEN")
 
 def get_pdf_text(pdf_files):
     
