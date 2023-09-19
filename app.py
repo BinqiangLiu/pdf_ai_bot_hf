@@ -48,14 +48,14 @@ def get_conversation_chain(vector_store):
     # OpenAI Model
     #llm = ChatOpenAI()
     #HuggingFace Model
-    #llm = HuggingFaceHub(repo_id="google/flan-t5-xxl", model_kwargs={"temperature":0.5, "max_length":512})
-    repo_id="HuggingFaceH4/starchat-beta"
-    llm = HuggingFaceHub(repo_id=repo_id,
-                     model_kwargs={"min_length":100,
-                                   "max_new_tokens":1024, "do_sample":True,
-                                   "temperature":0.1,
-                                   "top_k":50,
-                                   "top_p":0.95, "eos_token_id":49155})
+    llm = HuggingFaceHub(repo_id="google/flan-t5-xxl", model_kwargs={"temperature":0.5, "max_length":512})
+    #repo_id="HuggingFaceH4/starchat-beta"
+    #llm = HuggingFaceHub(repo_id=repo_id,
+    #                 model_kwargs={"min_length":100,
+    #                               "max_new_tokens":1024, "do_sample":True,
+    #                               "temperature":0.1,
+    #                               "top_k":50,
+    #                               "top_p":0.95, "eos_token_id":49155})
     memory = ConversationBufferMemory(memory_key='chat_history', return_messages=True)
     conversation_chain = ConversationalRetrievalChain.from_llm(
         llm = llm,
