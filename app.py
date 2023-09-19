@@ -48,7 +48,8 @@ def get_conversation_chain(vector_store):
     # OpenAI Model
     #llm = ChatOpenAI()
     #HuggingFace Model
-    llm = HuggingFaceHub(repo_id="tiiuae/falcon-7b-instruct", model_kwargs={"min_length":100, "max_length":1024,"temperature":0.1})
+    llm = HuggingFaceHub(repo_id="meta-llama/Llama-2-70b-hf")
+    #llm = HuggingFaceHub(repo_id="meta-llama/Llama-2-70b-hf", model_kwargs={"min_length":100, "max_length":1024,"temperature":0.1})
     #repo_id="HuggingFaceH4/starchat-beta"
     #llm = HuggingFaceHub(repo_id=repo_id,
     #                 model_kwargs={"min_length":100,
