@@ -15,7 +15,7 @@ import sys
 import os
 from dotenv import load_dotenv
 
-HUGGINGFACEHUB_API_TOKEN = os.geteven("HUGGINGFACEHUB_API_TOKEN")
+HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
 def get_pdf_text(pdf_files):
     
