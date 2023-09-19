@@ -65,6 +65,9 @@ def get_conversation_chain(vector_store):
     print("***Start of printing Conversation_Chain***")
     print(conversation_chain)
     print("***End of printing Conversation_Chain***")
+    st.write("***Start of printing Conversation_Chain***")
+    st.write(conversation_chain)
+    st.write("***End of printing Conversation_Chain***")    
     return conversation_chain
 
 def handle_user_input(question):
