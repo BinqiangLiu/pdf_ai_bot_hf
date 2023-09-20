@@ -54,11 +54,11 @@ def get_conversation_chain(vector_store):
     #the open-source LLM flan-t5 is strangely underrated, but really powerful
     
     llm=HuggingFaceHub(repo_id="eachadea/legacy-ggml-vicuna-13b-4bit", model_kwargs={"temperature":0, "max_length":512})
-    #got an error - only with text2text-generation or text-generation models working.
+    #got an error - only with text2text-generation or text-generation models working.这个模型不是用于文本生成用途的？
     #https://huggingface.co/models?pipeline_tag=text2text-generation&sort=downloads
     
     #Tip&Tricks: alway verify that the model you are testing as the Inference API active/enabled.
-    #llm=HuggingFaceHub(repo_id="MBZUAI/LaMini-Flan-T5-783M", model_kwargs={"temperature":0, "max_length":512})
+    llm=HuggingFaceHub(repo_id="MBZUAI/LaMini-Flan-T5-783M", model_kwargs={"temperature":0, "max_length":512})
     #some relatively small parameters models really performant 
     
     #llm=HuggingFaceHub(repo_id="declare-lab/flan-alpaca-large", model_kwargs={"temperature":0, "max_length":512})
