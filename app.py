@@ -48,8 +48,8 @@ def get_conversation_chain(vector_store):
     # OpenAI Model
     #llm = ChatOpenAI()
     #HuggingFace Model
-    #llm = HuggingFaceHub(repo_id="google/flan-t5-xxl")
-    llm = HuggingFaceHub(repo_id="tiiuae/falcon-40b-instruct", model_kwargs={"temperature":0.5, "max_length":512})
+    llm = HuggingFaceHub(repo_id="google/flan-t5-xxl")
+    #llm = HuggingFaceHub(repo_id="tiiuae/falcon-40b-instruct", model_kwargs={"temperature":0.5, "max_length":512}) #出现超时timed out错误
     #llm = HuggingFaceHub(repo_id="meta-llama/Llama-2-70b-hf", model_kwargs={"min_length":100, "max_length":1024,"temperature":0.1})
     #repo_id="HuggingFaceH4/starchat-beta"
     #llm = HuggingFaceHub(repo_id=repo_id,
